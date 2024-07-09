@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="377.0" prefWidth="620.0" stylesheets="@../CSS/OrderManagement.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="BookstoreManagement.DetailController">
+   <children>
+      <HBox alignment="CENTER_LEFT" prefHeight="33.0" prefWidth="585.0">
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Order Details">
+               <font>
+                  <Font name="Bauhaus 93" size="39.0" />
+               </font>
+               <HBox.margin>
+                  <Insets left="10.0" />
+               </HBox.margin>
+            </Text>
+         </children>
+         <VBox.margin>
+            <Insets />
+         </VBox.margin>
+      </HBox>
+      <Separator prefHeight="10.0" prefWidth="611.0" styleClass="separatorOrd" />
+      <HBox prefHeight="35.0" prefWidth="620.0">
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="ID Order detail" textAlignment="CENTER" wrappingWidth="142.13666534423828">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Text>
+            <TextField fx:id="txtidorderdetail" prefHeight="25.0" prefWidth="124.0" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Cart ID" textAlignment="CENTER" wrappingWidth="136.80335235595703">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Text>
+            <TextField fx:id="txtcartid" prefHeight="25.0" prefWidth="105.0" />
+         </children>
+         <VBox.margin>
+            <Insets top="30.0" />
+         </VBox.margin>
+      </HBox>
+      <HBox layoutX="10.0" layoutY="60.0" prefHeight="27.0" prefWidth="582.0">
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="ID Order" textAlignment="CENTER" wrappingWidth="140.8033447265625">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Text>
+            <TextField fx:id="txtidorder" prefHeight="25.0" prefWidth="124.0" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Book ID" textAlignment="CENTER" wrappingWidth="136.8033447265625">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Text>
+            <TextField fx:id="txtidbook" prefHeight="25.0" prefWidth="107.0" />
+         </children>
+         <VBox.margin>
+            <Insets top="30.0" />
+         </VBox.margin>
+      </HBox>
+      <HBox layoutX="10.0" layoutY="85.0">
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Quantily" textAlignment="CENTER" wrappingWidth="140.13660395145416">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Text>
+            <TextField fx:id="txtquantily" prefHeight="25.0" prefWidth="123.0" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Price " textAlignment="CENTER" wrappingWidth="138.13672602176666">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Text>
+            <TextField fx:id="txtprice" prefHeight="25.0" prefWidth="107.0" />
+         </children>
+         <VBox.margin>
+            <Insets top="30.0" />
+         </VBox.margin>
+      </HBox>
+      <HBox layoutX="10.0" layoutY="85.0">
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Discount" textAlignment="CENTER" wrappingWidth="140.80321502685547">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Text>
+            <TextField fx:id="txtdiscount" prefHeight="25.0" prefWidth="125.0" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Created at " textAlignment="CENTER" wrappingWidth="134.8032604455948">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Text>
+            <TextField fx:id="txtcreated" prefHeight="25.0" prefWidth="193.0" />
+         </children>
+         <VBox.margin>
+            <Insets top="30.0" />
+         </VBox.margin>
+      </HBox>
+      <HBox prefHeight="55.0" prefWidth="620.0">
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Email " textAlignment="CENTER" wrappingWidth="140.80321502685547">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Text>
+            <TextField fx:id="txtemailor" prefHeight="25.0" prefWidth="447.0" />
+         </children>
+         <VBox.margin>
+            <Insets top="30.0" />
+         </VBox.margin>
+      </HBox>
+   </children>
+</VBox>

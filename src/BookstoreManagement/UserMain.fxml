@@ -1,0 +1,761 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.control.SplitMenuButton?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" fx:id="fMain" prefHeight="900.0" prefWidth="1600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="BookstoreManagement.UserMainController">
+   <children>
+      <StackPane prefHeight="150.0" prefWidth="200.0">
+         <children>
+            <BorderPane prefHeight="200.0" prefWidth="200.0">
+               <top>
+                  <AnchorPane prefHeight="70.0" prefWidth="1601.0" styleClass="topbg" stylesheets="@../CSS/Menu.css" BorderPane.alignment="CENTER">
+                     <children>
+                        <HBox layoutX="1150.0" layoutY="11.0">
+                           <children>
+                              <Label fx:id="name_user" text="User" textFill="#797777">
+                                 <font>
+                                    <Font name="Arial Bold" size="16.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets right="10.0" top="18.0" />
+                                 </HBox.margin>
+                              </Label>
+                              <SplitMenuButton fx:id="btn_edittprofile" mnemonicParsing="false" onAction="#swtichForm" prefHeight="0.0" prefWidth="140.0" styleClass="splitmenuprofile" text=" Profile">
+                                 <items>
+                                    <MenuItem fx:id="btn_paymentmenu" mnemonicParsing="false" onAction="#btnpayment" text="Payment" />
+                                    <MenuItem fx:id="btn_logoutmenu" mnemonicParsing="false" onAction="#logout" text="Logout" />
+                                 </items>
+                                 <HBox.margin>
+                                    <Insets right="30.0" />
+                                 </HBox.margin>
+                                 <graphic>
+                                    <ImageView fx:id="avatar_user" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" styleClass="avatar">
+                                       <image>
+                                          <Image url="@../Icon/icons8_member_32px.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </SplitMenuButton>
+                              <Button fx:id="btn_shoppingcart" mnemonicParsing="false" onAction="#swtichForm" prefHeight="40.0" prefWidth="40.0" styleClass="buttoncart" stylesheets="@../CSS/Menu.css">
+                                 <graphic>
+                                    <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../Icon/icons8_shopping_cart_32px.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                                 <HBox.margin>
+                                    <Insets />
+                                 </HBox.margin>
+                              </Button>
+                           </children>
+                        </HBox>
+                        <Button fx:id="btn_minimize" layoutX="1506.0" layoutY="10.0" mnemonicParsing="false" onAction="#handle_minimize" stylesheets="@../CSS/Login.css" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="0.0">
+                           <graphic>
+                              <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../Icon/icons8_subtract_18px_1.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <styleClass>
+                              <String fx:value="window-button" />
+                              <String fx:value="minimize-button" />
+                           </styleClass>
+                        </Button>
+                        <Button fx:id="btn_close" layoutX="1552.0" layoutY="12.0" mnemonicParsing="false" onAction="#handle_close" stylesheets="@../CSS/Login.css" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <graphic>
+                              <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../Icon/icons8_multiply_18px_1.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <styleClass>
+                              <String fx:value="window-button" />
+                              <String fx:value="close-button" />
+                           </styleClass>
+                        </Button>
+                        <HBox layoutX="18.0" layoutY="19.0">
+                           <children>
+                              <Label prefHeight="32.0" prefWidth="110.0" styleClass="logo" text="Book Store" textFill="#3e3e42">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets right="10.0" top="5.0" />
+                                 </HBox.margin>
+                              </Label>
+                              <Line endX="-100.0" endY="20.0" startX="-100.0" stroke="#aeaeae" strokeWidth="0.3">
+                                 <HBox.margin>
+                                    <Insets top="10.0" />
+                                 </HBox.margin>
+                              </Line>
+                              <Button fx:id="btn_homebook" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#swtichForm" prefHeight="41.0" prefWidth="100.0" stylesheets="@../CSS/Menu.css" text="Home" textFill="#797777">
+                                 <graphic>
+                                    <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../Icon/icons8_online_store_32px_1.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                                 <font>
+                                    <Font name="Arial Bold" size="20.0" />
+                                 </font>
+                                 <styleClass>
+                                    <String fx:value="buttonmenuhome" />
+                                    <String fx:value="logohome" />
+                                 </styleClass>
+                                 <HBox.margin>
+                                    <Insets left="10.0" />
+                                 </HBox.margin>
+                              </Button>
+                           </children>
+                        </HBox>
+                     </children>
+                     <BorderPane.margin>
+                        <Insets />
+                     </BorderPane.margin>
+                  </AnchorPane>
+               </top>
+               <right>
+                  <AnchorPane prefHeight="830.0" prefWidth="1385.0" styleClass="lineborder3" BorderPane.alignment="CENTER">
+                     <children>
+                        <AnchorPane fx:id="BOOKS" prefHeight="830.0" prefWidth="1385.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                              <Label layoutX="445.0" layoutY="234.0" text="2">
+                                 <font>
+                                    <Font size="95.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane fx:id="ORDERS" prefHeight="830.0" prefWidth="1385.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                              <Label layoutX="428.0" layoutY="193.0" text="5">
+                                 <font>
+                                    <Font size="96.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane fx:id="PAYMENT" prefHeight="830.0" prefWidth="1385.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                              <Label layoutX="445.0" layoutY="234.0" text="6">
+                                 <font>
+                                    <Font size="95.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane fx:id="DISCOUNT" prefHeight="830.0" prefWidth="1385.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                              <Label layoutX="428.0" layoutY="193.0" text="7">
+                                 <font>
+                                    <Font size="96.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane fx:id="SHOPPINGCART" prefHeight="830.0" prefWidth="1385.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                              <Label layoutX="445.0" layoutY="234.0" text="10">
+                                 <font>
+                                    <Font size="95.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane fx:id="PROFILE" layoutX="10.0" layoutY="10.0" prefHeight="830.0" prefWidth="1600.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                              <BorderPane layoutX="14.0" layoutY="88.0" prefHeight="838.0" prefWidth="1600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <right>
+                                    <VBox prefHeight="200.0" prefWidth="240.0" BorderPane.alignment="CENTER">
+                                       <children>
+                                          <Label text="Setting Profile">
+                                             <font>
+                                                <Font name="Arial Bold" size="22.0" />
+                                             </font>
+                                             <VBox.margin>
+                                                <Insets left="45.0" top="30.0" />
+                                             </VBox.margin>
+                                          </Label>
+                                          <Line endX="85.0" startX="-100.0" stroke="#aeaeae">
+                                             <VBox.margin>
+                                                <Insets bottom="15.0" left="30.0" top="15.0" />
+                                             </VBox.margin>
+                                          </Line>
+                                          <Button fx:id="btn_editprofileuser" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#swtichFormProfile" prefHeight="52.0" prefWidth="240.0" styleClass="buttonmenu" stylesheets="@../CSS/Menu.css" text="Edit Profile" textFill="#3e3e42">
+                                             <graphic>
+                                                <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@../Icon/icons8_edit_property_32px_1.png" />
+                                                   </image>
+                                                </ImageView>
+                                             </graphic>
+                                             <font>
+                                                <Font name="Arial" size="20.0" />
+                                             </font>
+                                             <VBox.margin>
+                                                <Insets />
+                                             </VBox.margin>
+                                          </Button>
+                                          <Button fx:id="btn_changepassword" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#swtichFormProfile" prefHeight="52.0" prefWidth="240.0" styleClass="buttonmenu" stylesheets="@../CSS/Menu.css" text="Change Password" textFill="#3e3e42">
+                                             <graphic>
+                                                <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@../Icon/icons8_password_32px.png" />
+                                                   </image>
+                                                </ImageView>
+                                             </graphic>
+                                             <font>
+                                                <Font name="Arial" size="20.0" />
+                                             </font>
+                                             <VBox.margin>
+                                                <Insets />
+                                             </VBox.margin>
+                                          </Button>
+                                          <Button fx:id="btn_profilehistory" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#swtichFormProfile" prefHeight="52.0" prefWidth="240.0" styleClass="buttonmenu" stylesheets="@../CSS/Menu.css" text="Payment History" textFill="#3e3e42">
+                                             <graphic>
+                                                <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@../Icon/icons8_payment_history_32px.png" />
+                                                   </image>
+                                                </ImageView>
+                                             </graphic>
+                                             <font>
+                                                <Font name="Arial" size="20.0" />
+                                             </font>
+                                          </Button>
+                                          <Button fx:id="btn_logouteditprofile" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#logout" prefHeight="47.0" prefWidth="240.0" styleClass="buttonmenu" stylesheets="@../CSS/Menu.css" text="Log Out" textFill="#a81414">
+                                             <graphic>
+                                                <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@../Icon/icons8_Logout_32px_1.png" />
+                                                   </image>
+                                                </ImageView>
+                                             </graphic>
+                                             <font>
+                                                <Font name="Arial" size="20.0" />
+                                             </font>
+                                             <VBox.margin>
+                                                <Insets />
+                                             </VBox.margin>
+                                          </Button>
+                                       </children>
+                                    </VBox>
+                                 </right>
+                                 <center>
+                                    <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                                       <children>
+                                          <AnchorPane fx:id="EDITPROFILEUSER" prefHeight="830.0" prefWidth="1360.0">
+                                             <children>
+                                                <TextField fx:id="profile_username" editable="false" layoutX="541.0" layoutY="227.0" prefHeight="35.0" prefWidth="400.0" promptText="Username" styleClass="textfieldmember">
+                                                   <font>
+                                                      <Font size="20.0" />
+                                                   </font>
+                                                </TextField>
+                                                <TextField fx:id="profile_email" layoutX="541.0" layoutY="469.0" prefHeight="35.0" prefWidth="400.0" promptText="Email" styleClass="textfieldmember">
+                                                   <font>
+                                                      <Font size="16.0" />
+                                                   </font>
+                                                </TextField>
+                                                <CheckBox fx:id="profile_male" layoutX="541.0" layoutY="549.0" mnemonicParsing="false" onAction="#ck_profilegender" prefHeight="35.0" prefWidth="75.0" text="Male" />
+                                                <CheckBox fx:id="profile_female" layoutX="661.0" layoutY="549.0" mnemonicParsing="false" onAction="#ck_profilegender" prefHeight="35.0" prefWidth="75.0" text="Female" />
+                                                <Button fx:id="btn_profileupdate" layoutX="636.0" layoutY="634.0" mnemonicParsing="false" onAction="#handle_updateprofileuser" prefHeight="35.0" prefWidth="200.0" styleClass="btnmember" text="Update">
+                                                   <graphic>
+                                                      <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                                                         <image>
+                                                            <Image url="@../Icon/icons8_update_user_32px_1.png" />
+                                                         </image>
+                                                      </ImageView>
+                                                   </graphic>
+                                                   <font>
+                                                      <Font name="Arial Bold" size="12.0" />
+                                                   </font>
+                                                </Button>
+                                                <Button fx:id="btn_profilechangeimg" layoutX="127.0" layoutY="513.0" mnemonicParsing="false" onAction="#insertImageprofile" prefHeight="35.0" prefWidth="120.0" styleClass="btnchoicebox" text="Change Image">
+                                                   <font>
+                                                      <Font size="15.0" />
+                                                   </font></Button>
+                                                <DatePicker fx:id="date_profileuser" layoutX="699.0" layoutY="389.0" prefHeight="45.0" prefWidth="200.0" />
+                                                <Label layoutX="548.0" layoutY="397.0" text="Brithday" textFill="SILVER">
+                                                   <font>
+                                                      <Font size="24.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label layoutX="603.0" layoutY="79.0" prefHeight="61.0" prefWidth="266.0" styleClass="logoprofile" text="Change Profile" wrapText="true">
+                                                   <font>
+                                                      <Font size="35.0" />
+                                                   </font>
+                                                </Label>
+                                                <AnchorPane fx:id="pane_imgprofile" layoutX="37.0" layoutY="101.0" prefHeight="350.0" prefWidth="281.0">
+                                                   <children>
+                                                      <ImageView fx:id="img_profileuser" fitHeight="350.0" fitWidth="300.0" pickOnBounds="true" preserveRatio="true">
+                                                         <image>
+                                                            <Image url="@../Icon/Login6.png" />
+                                                         </image>
+                                                      </ImageView>
+                                                   </children>
+                                                </AnchorPane>
+                                                <AnchorPane layoutX="37.0" layoutY="462.0" visible="false">
+                                                   <children>
+                                                      <Label fx:id="label_pathprofile" prefHeight="17.0" prefWidth="300.0" text="Path image" />
+                                                   </children>
+                                                </AnchorPane>
+                                             </children>
+                                          </AnchorPane>
+                                          <AnchorPane fx:id="CHANGEPASSWORD" prefHeight="830.0" prefWidth="1195.0" visible="false" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                             <children>
+                                                <PasswordField fx:id="profile_comfirmpassword" layoutX="382.0" layoutY="509.0" prefHeight="35.0" prefWidth="400.0" promptText="Confirm Password" styleClass="textfieldmember">
+                                                   <font>
+                                                      <Font size="16.0" />
+                                                   </font>
+                                                </PasswordField>
+                                                <PasswordField fx:id="profile_newpassword" layoutX="382.0" layoutY="416.0" prefHeight="35.0" prefWidth="400.0" promptText="New Password" styleClass="textfieldmember">
+                                                   <font>
+                                                      <Font size="16.0" />
+                                                   </font>
+                                                </PasswordField>
+                                                <AnchorPane layoutX="382.0" layoutY="255.0">
+                                                   <children>
+                                                      <PasswordField fx:id="profile_oldpassword" prefHeight="35.0" prefWidth="400.0" promptText="Old Password" styleClass="textfieldmember">
+                                                         <font>
+                                                            <Font size="16.0" />
+                                                         </font>
+                                                      </PasswordField>
+                                                      <ImageView fx:id="btn_showpass" fitHeight="32.0" fitWidth="32.0" layoutX="368.0" layoutY="5.0" onDragDetected="#handle_showpass" onMouseClicked="#handle_showpass" pickOnBounds="true" preserveRatio="true">
+                                                         <image>
+                                                            <Image url="@../Icon/icons8_show_password_32px_1.png" />
+                                                         </image>
+                                                      </ImageView>
+                                                      <TextField fx:id="profile_oldpassword_visible" prefHeight="35.0" prefWidth="400.0" promptText="Old Password" styleClass="textfieldmember">
+                                                         <font>
+                                                            <Font size="16.0" />
+                                                         </font>
+                                                      </TextField>
+                                                      <ImageView fx:id="btn_hidenpass" fitHeight="32.0" fitWidth="32.0" layoutX="368.0" layoutY="5.0" onDragDetected="#handle_showpass" onMouseClicked="#handle_showpass" pickOnBounds="true" preserveRatio="true">
+                                                         <image>
+                                                            <Image url="@../Icon/icons8_hide_32px.png" />
+                                                         </image>
+                                                      </ImageView>
+                                                   </children>
+                                                </AnchorPane>
+                                                <Label layoutX="429.0" layoutY="80.0" styleClass="logoprofile" text="Change Password">
+                                                   <font>
+                                                      <Font size="35.0" />
+                                                   </font>
+                                                </Label>
+                                                <Button fx:id="btn_profileupdatepassword" layoutX="472.0" layoutY="627.0" mnemonicParsing="false" onAction="#handle_changepassword" prefHeight="35.0" prefWidth="200.0" styleClass="btnmember" text="Change">
+                                                   <graphic>
+                                                      <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                                                         <image>
+                                                            <Image url="@../Icon/icons8_password_reset_32px.png" />
+                                                         </image>
+                                                      </ImageView>
+                                                   </graphic>
+                                                   <font>
+                                                      <Font size="18.0" />
+                                                   </font>
+                                                </Button>
+                                                <AnchorPane layoutX="381.0" layoutY="180.0" visible="false">
+                                                   <children>
+                                                      <TextField fx:id="profile_changpassworduser" prefHeight="35.0" prefWidth="402.0" promptText="User Name" styleClass="textfieldmember">
+                                                         <font>
+                                                            <Font size="16.0" />
+                                                         </font>
+                                                      </TextField>
+                                                   </children>
+                                                </AnchorPane>
+                                             </children>
+                                          </AnchorPane>
+                                          <AnchorPane fx:id="PAYMENTHISTORY" prefHeight="830.0" prefWidth="1195.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                             <children>
+                                                <TableView fx:id="tb_paymenthistory" layoutX="14.0" layoutY="14.0" prefHeight="800.0" prefWidth="1165.0" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="15.0">
+                                                  <columns>
+                                                    <TableColumn fx:id="cl_pfdate" prefWidth="200.0" text="Date " />
+                                                    <TableColumn fx:id="cl_pfbookname" minWidth="0.0" prefWidth="250.0" text="Book Name" />
+                                                      <TableColumn fx:id="cl_pfprice" minWidth="0.0" prefWidth="160.0" text="Price" />
+                                                      <TableColumn fx:id="cl_pfquantity" minWidth="0.0" prefWidth="70.0" text="Quantity" />
+                                                      <TableColumn fx:id="cl_pftotal" minWidth="0.0" prefWidth="250.0" text="Total" />
+                                                  </columns>
+                                                </TableView>
+                                             </children>
+                                          </AnchorPane>
+                                          <AnchorPane fx:id="cardcheck" layoutX="283.0" layoutY="222.0" prefHeight="506.0" prefWidth="501.0" styleClass="pane-PaymentMethod" stylesheets="@../../../../A1/src/CSS/Menu.css" visible="false">
+                                             <children>
+                                                <Label fx:id="paycard" layoutX="14.0" layoutY="14.0" text="Payment Method">
+                                                   <font>
+                                                      <Font name="System Bold" size="30.0" />
+                                                   </font>
+                                                </Label>
+                                                <ImageView accessibleRole="BUTTON" fitHeight="52.0" fitWidth="65.0" layoutX="199.0" layoutY="61.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@../../../../A1/src/Icon/paypal_125px.png" />
+                                                   </image>
+                                                </ImageView>
+                                                <ImageView fitHeight="52.0" fitWidth="79.0" layoutX="272.0" layoutY="61.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@../../../../A1/src/Icon/visa_125px.png" />
+                                                   </image>
+                                                </ImageView>
+                                                <ImageView fitHeight="52.0" fitWidth="79.0" layoutX="346.0" layoutY="59.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@../../../../A1/src/Icon/mastercard_125px.png" />
+                                                   </image>
+                                                </ImageView>
+                                                <ImageView fitHeight="52.0" fitWidth="77.0" layoutX="420.0" layoutY="59.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@../../../../A1/src/Icon/jcb_125px.png" />
+                                                   </image>
+                                                </ImageView>
+                                                <Label layoutX="68.0" layoutY="72.0" text="Secure">
+                                                   <font>
+                                                      <Font size="20.0" />
+                                                   </font>
+                                                </Label>
+                                                <ImageView fitHeight="45.0" fitWidth="65.0" layoutX="14.0" layoutY="64.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@../../../../A1/src/Icon/secure_125px.png" />
+                                                   </image>
+                                                </ImageView>
+                                                <Label layoutX="11.0" layoutY="125.0" text="First Name">
+                                                   <font>
+                                                      <Font size="24.0" />
+                                                   </font>
+                                                </Label>
+                                                <TextField fx:id="txt_firstname" layoutX="14.0" layoutY="169.0" prefHeight="38.0" prefWidth="200.0" />
+                                                <Label layoutX="262.0" layoutY="128.0" text="Last Name">
+                                                   <font>
+                                                      <Font size="24.0" />
+                                                   </font>
+                                                </Label>
+                                                <TextField fx:id="txt_lastname" layoutX="259.0" layoutY="169.0" prefHeight="38.0" prefWidth="200.0" />
+                                                <TextField fx:id="txt_cardnumber" layoutX="14.0" layoutY="262.0" prefHeight="38.0" prefWidth="447.0" />
+                                                <Label layoutX="11.0" layoutY="218.0" text="Card Number">
+                                                   <font>
+                                                      <Font size="24.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label layoutX="11.0" layoutY="320.0" text="Expire Date">
+                                                   <font>
+                                                      <Font size="24.0" />
+                                                   </font>
+                                                </Label>
+                                                <DatePicker fx:id="txt_date" layoutX="11.0" layoutY="368.0" prefHeight="38.0" prefWidth="133.0" />
+                                                <Label layoutX="177.0" layoutY="320.0" text="CVC">
+                                                   <font>
+                                                      <Font size="24.0" />
+                                                   </font>
+                                                </Label>
+                                                <TextField fx:id="txt_cvc" layoutX="172.0" layoutY="368.0" prefHeight="38.0" prefWidth="133.0" text="*** ***" />
+                                                <Label layoutX="324.0" layoutY="320.0" text="Zip Code">
+                                                   <font>
+                                                      <Font size="24.0" />
+                                                   </font>
+                                                </Label>
+                                                <TextField fx:id="txt_zipcode" layoutX="324.0" layoutY="368.0" prefHeight="38.0" prefWidth="144.0" text="*** ***" />
+                                                <Button fx:id="menu_paybtn1" layoutX="115.0" layoutY="426.0" mnemonicParsing="false" onAction="#handleCashButton" prefHeight="70.0" prefWidth="294.0" stylesheets="@../../../../A1/src/CSS/Menu.css" text="Pay">
+                                                   <font>
+                                                      <Font name="System Bold" size="19.0" />
+                                                   </font>
+                                                   <styleClass>
+                                                      <String fx:value="pay-btn" />
+                                                      <String fx:value="\\" />
+                                                   </styleClass>
+                                                </Button>
+                                                <Button fx:id="btnexit1" layoutX="469.0" layoutY="6.0" mnemonicParsing="false" onAction="#handleExitbutton2" prefHeight="40.0" prefWidth="52.0" styleClass="close" stylesheets="@../../../../A1/src/CSS/Menu.css">
+                                                   <graphic>
+                                                      <ImageView fitHeight="35.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" styleClass="close">
+                                                         <image>
+                                                            <Image url="@../../../../A1/src/Icon/delete_125px.png" />
+                                                         </image>
+                                                      </ImageView>
+                                                   </graphic>
+                                                </Button>
+                                             </children>
+                                          </AnchorPane>
+                                       </children>
+                                    </AnchorPane>
+                                 </center>
+                              </BorderPane>
+                           </children>
+                           <padding>
+                              <Insets bottom="1.0" right="1.0" />
+                           </padding>
+                        </AnchorPane>
+                        <AnchorPane fx:id="SHOPPINGCART1" layoutX="9.0" layoutY="8.0" prefHeight="834.0" prefWidth="926.0" styleClass="white-bg" stylesheets="@../../../../A1/src/CSS/Menu.css">
+                           <children>
+                              <Label layoutX="144.0" layoutY="17.0" prefHeight="58.0" prefWidth="326.0" text="SHOPPING CART">
+                                 <font>
+                                    <Font name="System Bold" size="35.0" />
+                                 </font>
+                              </Label>
+                              <ImageView fitHeight="92.0" fitWidth="116.0" layoutX="14.0" pickOnBounds="true" preserveRatio="true" styleClass="logo">
+                                 <image>
+                                    <Image url="@../Icon/shopping_125px.png" />
+                                 </image>
+                              </ImageView>
+                              <AnchorPane layoutX="9.0" layoutY="92.0" prefHeight="741.0" prefWidth="906.0">
+                                 <children>
+                                    <Label layoutX="30.0" layoutY="24.0" text="Book ID:">
+                                       <font>
+                                          <Font size="25.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="30.0" layoutY="76.0" text="Book Title:">
+                                       <font>
+                                          <Font size="25.0" />
+                                       </font>
+                                    </Label>
+                                    <ComboBox fx:id="purchase_bookID" layoutX="161.0" layoutY="20.0" prefHeight="45.0" prefWidth="130.0" stylesheets="@../../../../A1/src/CSS/Menu.css" />
+                                    <ComboBox fx:id="purchase_booktitle" layoutX="161.0" layoutY="72.0" prefHeight="45.0" prefWidth="231.0" styleClass="combo-box" stylesheets="@../../../../A1/src/CSS/Menu.css" />
+                                    <Button fx:id="btnadd" alignment="CENTER_RIGHT" layoutX="577.0" layoutY="130.0" mnemonicParsing="false" onAction="#purchaseadd" prefHeight="45.0" prefWidth="197.0" styleClass="add-btn" stylesheets="@../../../../A1/src/CSS/Menu.css" text="Add to cart">
+                                       <font>
+                                          <Font size="20.0" />
+                                       </font>
+                                    </Button>
+                                    <ImageView fitHeight="45.0" fitWidth="52.0" layoutX="577.0" layoutY="130.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../Icon/add_125px.png" />
+                                       </image>
+                                    </ImageView>
+                                    <AnchorPane layoutY="190.0" prefHeight="551.0" prefWidth="569.0" styleClass="info" stylesheets="@../../../../A1/src/CSS/Menu.css">
+                                       <children>
+                                          <Label layoutX="8.0" layoutY="128.0" text="Book ID:">
+                                             <font>
+                                                <Font name="System Bold" size="25.0" />
+                                             </font>
+                                          </Label>
+                                          <Label layoutX="8.0" layoutY="180.0" text="Book Title:">
+                                             <font>
+                                                <Font name="System Bold" size="25.0" />
+                                             </font>
+                                          </Label>
+                                          <Label layoutX="8.0" layoutY="228.0" text="Author:">
+                                             <font>
+                                                <Font name="System Bold" size="25.0" />
+                                             </font>
+                                          </Label>
+                                          <Label layoutX="8.0" layoutY="277.0" text="Genre:">
+                                             <font>
+                                                <Font name="System Bold" size="25.0" />
+                                             </font>
+                                          </Label>
+                                          <Label layoutX="8.0" layoutY="330.0" text="Created At:">
+                                             <font>
+                                                <Font name="System Bold" size="25.0" />
+                                             </font>
+                                          </Label>
+                                          <Label fx:id="pruchase_info_bookID" layoutX="150.0" layoutY="129.0" prefHeight="35.0" prefWidth="280.0" styleClass="info-label" stylesheets="@../../../../A1/src/CSS/Menu.css">
+                                             <font>
+                                                <Font size="24.0" />
+                                             </font>
+                                          </Label>
+                                          <Label fx:id="pruchase_info_booktitle" layoutX="150.0" layoutY="181.0" prefHeight="35.0" prefWidth="280.0" styleClass="info-label" stylesheets="@../../../../A1/src/CSS/Menu.css">
+                                             <font>
+                                                <Font size="24.0" />
+                                             </font>
+                                          </Label>
+                                          <Label fx:id="pruchase_info_author" layoutX="150.0" layoutY="229.0" prefHeight="35.0" prefWidth="280.0" styleClass="info-label" stylesheets="@../../../../A1/src/CSS/Menu.css">
+                                             <font>
+                                                <Font size="24.0" />
+                                             </font>
+                                          </Label>
+                                          <Label fx:id="pruchase_info_genre" layoutX="150.0" layoutY="277.0" prefHeight="35.0" prefWidth="280.0" styleClass="info-label" stylesheets="@../../../../A1/src/CSS/Menu.css">
+                                             <font>
+                                                <Font size="24.0" />
+                                             </font>
+                                          </Label>
+                                          <Label fx:id="pruchase_info_createat" layoutX="150.0" layoutY="331.0" prefHeight="35.0" prefWidth="280.0" styleClass="info-label" stylesheets="@../../../../A1/src/CSS/Menu.css">
+                                             <font>
+                                                <Font size="24.0" />
+                                             </font>
+                                          </Label>
+                                          <Label layoutX="8.0" layoutY="379.0" text="Price:">
+                                             <font>
+                                                <Font name="System Bold" size="25.0" />
+                                             </font>
+                                          </Label>
+                                          <Label fx:id="pruchase_info_price" layoutX="150.0" layoutY="380.0" prefHeight="35.0" prefWidth="150.0" styleClass="info-label" stylesheets="@../../../../A1/src/CSS/Menu.css">
+                                             <font>
+                                                <Font size="24.0" />
+                                             </font>
+                                          </Label>
+                                          <Label layoutX="8.0" layoutY="440.0" text="Discount:">
+                                             <font>
+                                                <Font name="System Bold" size="25.0" />
+                                             </font>
+                                          </Label>
+                                          <Label fx:id="pruchase_info_discount" layoutX="150.0" layoutY="440.0" prefHeight="35.0" prefWidth="80.0" styleClass="info-label" stylesheets="@../../../../A1/src/CSS/Menu.css">
+                                             <font>
+                                                <Font size="24.0" />
+                                             </font>
+                                          </Label>
+                                          <Label layoutX="8.0" layoutY="77.0" text="Order ID:">
+                                             <font>
+                                                <Font name="System Bold" size="25.0" />
+                                             </font>
+                                          </Label>
+                                          <Label fx:id="pruchase_info_orderid" layoutX="150.0" layoutY="78.0" prefHeight="35.0" prefWidth="150.0" styleClass="info-label" stylesheets="@../../../../A1/src/CSS/Menu.css">
+                                             <font>
+                                                <Font size="24.0" />
+                                             </font>
+                                          </Label>
+                                          <Label layoutX="113.0" prefHeight="58.0" prefWidth="342.0" text="Order Infomation">
+                                             <font>
+                                                <Font name="Candara Bold Italic" size="40.0" />
+                                             </font>
+                                          </Label>
+                                          <Label layoutX="200.0" layoutY="488.0" prefHeight="40.0" prefWidth="342.0" text="Check the infomation before add">
+                                             <font>
+                                                <Font name="Candara Bold Italic" size="25.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </AnchorPane>
+                                    <Label layoutX="30.0" layoutY="134.0" text="Quantity:">
+                                       <font>
+                                          <Font size="25.0" />
+                                       </font>
+                                    </Label>
+                                    <Spinner fx:id="purchase_quantity" layoutX="161.0" layoutY="133.0" onMouseClicked="#purchaseQuantity" prefHeight="38.0" prefWidth="101.0" styleClass="combo-box" stylesheets="@../../../../A1/src/CSS/Menu.css" />
+                                    <ImageView fitHeight="552.0" fitWidth="340.0" layoutX="568.0" layoutY="189.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../Icon/031d1496eea8eb1b4088f240cf382f46.jpg" />
+                                       </image>
+                                    </ImageView>
+                                    <Label layoutX="421.0" layoutY="25.0" text="Email:">
+                                       <font>
+                                          <Font size="25.0" />
+                                       </font>
+                                    </Label>
+                                    <AnchorPane fx:id="Paymentmethod" layoutX="439.0" layoutY="241.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="191.0" prefWidth="426.0" styleClass="pane-PaymentMethod" stylesheets="@../../../../A1/src/CSS/Menu.css" visible="false">
+                                       <children>
+                                          <Label layoutX="60.0" layoutY="36.0" text="Choose Payment Method">
+                                             <font>
+                                                <Font name="System Bold" size="26.0" />
+                                             </font>
+                                          </Label>
+                                          <Button fx:id="btncash" alignment="CENTER_RIGHT" layoutX="22.0" layoutY="105.0" mnemonicParsing="false" onAction="#menuReciptBtn" prefHeight="52.0" prefWidth="169.0" styleClass="qr-btn" stylesheets="@../../../../A1/src/CSS/Menu.css" text="QR Pay">
+                                             <font>
+                                                <Font size="20.0" />
+                                             </font>
+                                             <padding>
+                                                <Insets right="10.0" />
+                                             </padding>
+                                          </Button>
+                                          <Button fx:id="btncard" alignment="CENTER_RIGHT" layoutX="232.0" layoutY="105.0" mnemonicParsing="false" onAction="#handlCardButton" prefHeight="52.0" prefWidth="161.0" styleClass="qr-btn" stylesheets="@../../../../A1/src/CSS/Menu.css" text="Card">
+                                             <font>
+                                                <Font size="20.0" />
+                                             </font>
+                                             <padding>
+                                                <Insets right="10.0" />
+                                             </padding>
+                                          </Button>
+                                          <ImageView fitHeight="52.0" fitWidth="70.0" layoutX="22.0" layoutY="105.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../../../../A1/src/Icon/qr_code1_125px.png" />
+                                             </image>
+                                          </ImageView>
+                                          <ImageView fitHeight="52.0" fitWidth="70.0" layoutX="238.0" layoutY="105.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../../../../A1/src/Icon/insert_credit_card_125px.png" />
+                                             </image>
+                                          </ImageView>
+                                          <ImageView fitHeight="38.0" fitWidth="42.0" layoutX="378.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../../../../A1/src/Icon/delete_125px.png" />
+                                             </image>
+                                          </ImageView>
+                                          <Button fx:id="btnexit" layoutX="371.0" layoutY="6.0" mnemonicParsing="false" onAction="#handleExitbutton" prefHeight="38.0" prefWidth="52.0" styleClass="close" stylesheets="@../../../../A1/src/CSS/Menu.css" />
+                                       </children>
+                                    </AnchorPane>
+                                    <Label fx:id="pruchase_info_email" layoutX="499.0" layoutY="21.0" prefHeight="42.0" prefWidth="275.0" styleClass="infoemail-label" stylesheets="@../../../../A1/src/CSS/Menu.css" />
+                                 </children>
+                              </AnchorPane>
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane fx:id="PAYMENT1" layoutY="6.0" prefHeight="837.0" prefWidth="593.0" styleClass="white-bg" stylesheets="@../../../../A1/src/CSS/Menu.css" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="6.0">
+                           <children>
+                              <Label layoutX="174.0" layoutY="550.0" prefWidth="115.0" text="Total:">
+                                 <font>
+                                    <Font name="System Bold" size="35.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="menu_total" layoutX="297.0" layoutY="551.0" onMouseClicked="#menuDisplayTotal" prefHeight="27.0" prefWidth="147.0" text="\$0.00">
+                                 <font>
+                                    <Font size="33.0" />
+                                 </font>
+                              </Label>
+                              <Button fx:id="menu_paybtn" layoutX="103.0" layoutY="745.0" mnemonicParsing="false" onAction="#handlePayButton" prefHeight="57.0" prefWidth="403.0" styleClass="payment-btn" stylesheets="@../../../../A1/src/CSS/Menu.css" text="Chose payment method">
+                                 <font>
+                                    <Font name="System Bold" size="50.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="menu_removebtn" layoutX="103.0" layoutY="630.0" mnemonicParsing="false" onAction="#menuRemoveBtn" prefHeight="74.0" prefWidth="192.0" styleClass="remove-btn" stylesheets="@../../../../A1/src/CSS/Menu.css" text="Remove" textFill="#1e1d1d">
+                                 <font>
+                                    <Font name="System Bold" size="19.0" />
+                                 </font>
+                              </Button>
+                              <ImageView fitHeight="92.0" fitWidth="132.0" layoutX="22.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true" styleClass="logo">
+                                 <image>
+                                    <Image url="@../Icon/debit_card_125px.png" />
+                                 </image>
+                              </ImageView>
+                              <Label layoutX="138.0" layoutY="25.0" prefHeight="58.0" prefWidth="326.0" text="PAYMENT">
+                                 <font>
+                                    <Font name="System Bold" size="35.0" />
+                                 </font>
+                              </Label>
+                              <TableView fx:id="menu_tableview" layoutX="12.0" layoutY="100.0" prefHeight="441.0" prefWidth="560.0" styleClass="table-viewpayment" stylesheets="@../CSS/Menu.css">
+                                 <columns>
+                                    <TableColumn fx:id="menu_tb_book_id" prefWidth="50.0" text="ID" />
+                                    <TableColumn fx:id="menu_tb_title" minWidth="0.0" prefWidth="227.0" text="Book Name" />
+                                    <TableColumn fx:id="menu_tb_quantity" prefWidth="95.0" text="Quantity" />
+                                    <TableColumn fx:id="menu_tb_price" minWidth="0.0" prefWidth="63.0" text="Price" />
+                                    <TableColumn fx:id="menu_tb_createat" minWidth="0.0" prefWidth="123.0" text="Date of Payment" />
+                                 </columns>
+                              </TableView>
+                              <Button fx:id="menu_removebtn1" layoutX="314.0" layoutY="630.0" mnemonicParsing="false" onAction="#handleCashButton" prefHeight="74.0" prefWidth="192.0" styleClass="pay-btn" stylesheets="@../../../../A1/src/CSS/Menu.css" text="Paid" textFill="#1e1d1d">
+                                 <font>
+                                    <Font name="System Bold" size="19.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </AnchorPane>
+               </right>
+            </BorderPane>
+         </children>
+      </StackPane>
+   </children>
+   <stylesheets>
+      <URL value="@../CSS/Menu.css" />
+      <URL value="@../CSS/Login.css" />
+   </stylesheets>
+</AnchorPane>

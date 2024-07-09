@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.21.3.final using JasperReports Library version 6.21.3-4a3078d20785ebe464f18037d738d12fc98c13cf  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Book" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="6e5425f4-bb2a-4755-b9ab-be8762f8fc5c">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="BookStore"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT * FROM ShoppingCartItems]]>
+	</queryString>
+	<field name="cart_id" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="cart_id"/>
+		<property name="com.jaspersoft.studio.field.label" value="cart_id"/>
+	</field>
+	<field name="book_id" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="book_id"/>
+		<property name="com.jaspersoft.studio.field.label" value="book_id"/>
+	</field>
+	<field name="title" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="title"/>
+		<property name="com.jaspersoft.studio.field.label" value="title"/>
+	</field>
+	<field name="quantity" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="quantity"/>
+		<property name="com.jaspersoft.studio.field.label" value="quantity"/>
+	</field>
+	<field name="price" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.name" value="price"/>
+		<property name="com.jaspersoft.studio.field.label" value="price"/>
+	</field>
+	<field name="createat" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="createat"/>
+		<property name="com.jaspersoft.studio.field.label" value="createat"/>
+	</field>
+	<field name="email" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="email"/>
+		<property name="com.jaspersoft.studio.field.label" value="email"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="142" splitType="Stretch">
+			<staticText>
+				<reportElement x="100" y="60" width="350" height="80" uuid="2d239293-d9c1-4b63-af19-41605315a556"/>
+				<textElement textAlignment="Center">
+					<font size="50" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Book Invoice]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="390" y="0" width="180" height="40" uuid="7d8d1ee1-3a83-4951-bd26-710d34f4fead"/>
+				<textElement>
+					<font size="20"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{createat}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="250" y="0" width="240" height="40" uuid="36d2d1a0-c7a2-4224-89c2-d1ed454390cd"/>
+				<textElement textAlignment="Left">
+					<font size="20" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Payment date:]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch">
+			<line>
+				<reportElement x="-20" y="30" width="610" height="1" uuid="53b70a75-4407-4f5f-a217-122221f3ef2d"/>
+			</line>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="70" splitType="Stretch">
+			<staticText>
+				<reportElement x="-20" y="0" width="150" height="40" uuid="2d4a2003-7e7c-4813-ba18-e0bae132f4a6"/>
+				<textElement textAlignment="Center">
+					<font size="25" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Book Name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="190" y="-4" width="130" height="40" uuid="bdf1a087-3f34-449d-984a-31809f381549"/>
+				<textElement textAlignment="Center">
+					<font size="25" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Quantity]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="440" y="0" width="110" height="40" uuid="d096f4a2-e12c-40a7-af79-928384200426"/>
+				<textElement textAlignment="Center">
+					<font size="25" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Price]]></text>
+			</staticText>
+			<line>
+				<reportElement x="-20" y="50" width="610" height="1" uuid="cea3e401-6402-4195-9e45-2f4335596508"/>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="80" splitType="Stretch">
+			<property name="com.jaspersoft.studio.layout"/>
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<textField>
+				<reportElement stretchType="RelativeToBandHeight" x="-20" y="10" width="140" height="40" uuid="19c568f2-c203-4d72-a7c6-c916eb9e1793">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.layout.grid.x" value="20"/>
+					<property name="com.jaspersoft.layout.grid.y" value="10"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="1.0" lineColor="#FCFAFA"/>
+				</box>
+				<textElement textAlignment="Center" rotation="None" markup="none">
+					<font size="15"/>
+					<paragraph lineSpacing="Single" lineSpacingSize="7.0"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{title}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="190" y="0" width="130" height="40" uuid="a7ea8a42-0abf-4ce9-9322-979eb9605dd1"/>
+				<textElement textAlignment="Center">
+					<font size="15"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{quantity}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="430" y="10" width="110" height="40" uuid="3ffc5443-5712-48d3-b5a8-00d83b09a770"/>
+				<textElement textAlignment="Center">
+					<font size="15"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{price}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="61" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="270" splitType="Stretch">
+			<image>
+				<reportElement x="170" y="10" width="210" height="260" uuid="eae7e5c7-1f25-4e54-8819-f210a285778f"/>
+				<imageExpression><![CDATA["C:/Users/shado/Downloads/IMG_4657.png"]]></imageExpression>
+			</image>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

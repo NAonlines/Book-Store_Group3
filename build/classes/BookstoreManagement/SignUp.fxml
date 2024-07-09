@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" fx:id="fRegister" prefHeight="725.0" prefWidth="1000.0" stylesheets="@../CSS/Login.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="BookstoreManagement.SignUpController">
+   <children>
+      <AnchorPane layoutX="14.0" layoutY="13.0" prefHeight="700.0" prefWidth="420.0" styleClass="bgcolor">
+         <children>
+            <Label layoutX="94.0" layoutY="23.0" prefHeight="66.0" prefWidth="232.0" styleClass="label-welcome-back" text="Welcome">
+               <font>
+                  <Font name="Arial Bold" size="30.0" />
+               </font>
+            </Label>
+            <TextField fx:id="txt_username" layoutX="35.0" layoutY="170.0" prefHeight="45.0" prefWidth="350.0" promptText="Username" styleClass="textfield" />
+            <PasswordField fx:id="txt_password" layoutX="35.0" layoutY="240.0" prefHeight="45.0" prefWidth="350.0" promptText="Password" styleClass="textfield" />
+            <Hyperlink fx:id="lk_fgpassword" layoutX="258.0" layoutY="622.0" onAction="#lk_clickfgpassword" text="Forget password?">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Hyperlink>
+            <Button fx:id="btn_register" layoutX="35.0" layoutY="567.0" mnemonicParsing="false" onAction="#btn_register" prefHeight="35.0" prefWidth="350.0" styleClass="btnsignin" text="Register" textFill="WHITE">
+               <font>
+                  <Font size="18.0" />
+               </font>
+               <graphic>
+               </graphic>
+               <graphic>
+                  <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Icon/icons8_user_480px_2.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Hyperlink fx:id="lk_signin" layoutX="137.0" layoutY="651.0" onAction="#lk_clicksignin" prefHeight="35.0" prefWidth="127.0" text="Sign in Now!">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Hyperlink>
+            <Label layoutX="35.0" layoutY="659.0" text="Have an account?">
+               <font>
+                  <Font size="13.0" />
+               </font></Label>
+            <Label layoutX="35.0" layoutY="115.0" prefHeight="55.0" prefWidth="89.0" styleClass="label-login" text="Sign Up">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <PasswordField fx:id="txt_confirmpassword" layoutX="35.0" layoutY="310.0" prefHeight="45.0" prefWidth="350.0" promptText="Confirm Password" styleClass="textfield" />
+            <TextField fx:id="txt_email" layoutX="35.0" layoutY="450.0" prefHeight="45.0" prefWidth="350.0" promptText="Email" styleClass="textfield" />
+            <HBox layoutX="35.0" layoutY="517.0">
+               <children>
+                  <CheckBox fx:id="male" mnemonicParsing="false" onAction="#ck_gender" text="Male" />
+                  <CheckBox fx:id="female" mnemonicParsing="false" onAction="#ck_gender" text="Female">
+                     <HBox.margin>
+                        <Insets left="50.0" />
+                     </HBox.margin>
+                  </CheckBox>
+               </children>
+            </HBox>
+            <DatePicker fx:id="dt_birthday" layoutX="138.0" layoutY="381.0" prefHeight="45.0" prefWidth="247.0" promptText="Example : 06/30/2000" styleClass="btnmember" stylesheets="@../CSS/Menu.css" />
+            <Label layoutX="35.0" layoutY="388.0" prefHeight="30.0" prefWidth="89.0" text="Birthday " textFill="#a7a5a6">
+               <font>
+                  <Font name="Arial" size="20.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <ImageView fitHeight="659.0" fitWidth="549.0" layoutX="451.0" layoutY="33.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="33.0" AnchorPane.rightAnchor="0.0">
+         <image>
+            <Image url="@../Icon/Login6.png" />
+         </image>
+      </ImageView>
+      <HBox layoutX="920.0" layoutY="-3.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Button fx:id="btn_minimize" mnemonicParsing="false" onAction="#handle_minimize">
+               <graphic>
+         </graphic>
+               <styleClass>
+                  <String fx:value="window-button" />
+                  <String fx:value="minimize-button" />
+               </styleClass>
+               <graphic>
+                  <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Icon/icons8_subtract_18px_1.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <HBox.margin>
+                  <Insets right="5.0" />
+               </HBox.margin>
+            </Button>
+            <Button fx:id="btn_close" mnemonicParsing="false" onAction="#handle_close">
+               <graphic>
+         </graphic>
+               <styleClass>
+                  <String fx:value="window-button" />
+                  <String fx:value="close-button" />
+               </styleClass>
+               <graphic>
+                  <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Icon/icons8_multiply_18px_1.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+         </children>
+      </HBox>
+      <Line endX="-11.0" endY="700.0" layoutX="461.0" opacity="0.8" startX="-11.0" startY="25.0" stroke="#f5f4f4" strokeMiterLimit="5.0" strokeType="OUTSIDE" />
+   </children>
+   <styleClass>
+      <String fx:value="login-form" />
+      <String fx:value="bordermain" />
+   </styleClass>
+</AnchorPane>

@@ -1,0 +1,77 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : Jun 6, 2024, 1:24:08 PM
+    Author     : ADMIN
+*/
+
+.shadowOrd{
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.5), 5,0,0,0);
+}
+
+.white-bgOrd{
+    -fx-background-color: #fff;
+}
+
+.transparentOrd{
+    -fx-background-color: transparent;
+}
+
+.table-viewOrd{
+    -fx-background-color: transparent;
+    -fx-padding: 0;
+    -fx-border-color: linear-gradient(to bottom right, #0f6789, #286155);
+    -fx-border-width: 1.5px;
+}
+.table-viewOrd .column-header-background{
+    -fx-background-color: linear-gradient(to bottom right, #0f6789, #286155);
+    -fx-background-insets: 0 0 0 0;
+}
+.table-viewOrd .column-header, .filter{
+    -fx-background-color: #2980b9;
+    -fx-size: 40px;
+}
+.table-viewOrd .column-header .label{
+    -fx-text-fill: #ffff;
+}
+
+.btnOrd{
+    -fx-background-color: #2980b9; 
+    -fx-cursor: hand;
+    -fx-text-fill: #ffff;
+    -fx-font-size: 14px;
+}
+.btnOrd:hover{
+    -fx-background-color: linear-gradient(to bottom right, #0fb565, #399a8f); 
+    -fx-text-fill: black;
+}
+.btnOrd:pressed {
+    -fx-text-fill: #e74c3c;
+}
+.separatorOrd{
+    -fx-background-color: #2980b9;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.4), 5,0,0,0);  
+}
+.textfieldOrd{
+    -fx-background-color: #eee;
+    -fx-font-family: Tahoma;
+    -fx-border-color: #25bcbf;
+    -fx-border-width: .5px;
+    
+}
+.textfieldOrd:focused{
+    -fx-border-width: 1.5px;
+    -fx-background-color: #f5f5f5;
+}
+.searchOrd{
+    -fx-background-color: #f5f5f5;
+    -fx-border-width: 1.2px;
+    -fx-border-color: #3796a7;
+    -fx-font-size: 13px;
+    -fx-padding: 0px 0px 0px 28px;
+}
+.order{
+      -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.4), 5,0,0,0);   
+}

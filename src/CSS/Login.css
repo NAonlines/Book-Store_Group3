@@ -1,0 +1,144 @@
+.logoforgetpassword{
+    -fx-text-fill: #FFFFFF;
+    -fx-font-family: 'Arial', sans-serif;
+    -fx-padding: 10px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.4), 8, 0.5 , 0, 0);
+}
+
+
+.bordermain {
+    -fx-background-color: #ffffff;
+    -fx-border-width: 0.3px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.25), 10, 0.5, 0, 2);
+}
+.login-label {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333333;
+}
+
+.bgcolor{
+    -fx-background-color: #F5F5F5;
+}
+
+.login-form{
+    -fx-background-color: #FFFFFF;
+
+}
+.window-button {
+    -fx-background-radius: 0;
+    -fx-border-radius: 0;
+    -fx-background-color: transparent;
+    -fx-cursor: hand;   
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 5, 0, 0, 1);
+}
+
+.window-button:hover {
+}
+
+.window-button:pressed {
+    -fx-background-color: rgba(255, 255, 255, 0.3);
+}
+
+.close-button:hover {
+    -fx-background-color: #e74c3c;
+}
+
+.minimize-button:hover {
+    -fx-background-color: #3498db;
+}
+.btnsignin:hover{
+    -fx-background-color: #0047AB;
+}
+.btnsignin{
+    -fx-background-color: #3498db;
+    -fx-text-fill: white;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow( one-pass-box , rgba(0,0,0,0.2) , 5, 0.0 , 0 , 2 );
+}
+.btnsignin:focus{
+    -fx-background-color: #0047AB;
+    -fx-effect: dropshadow( one-pass-box , rgba(0,0,0,0.4) , 7, 0.0 , 0 , 3 );
+}
+.btnsignin:pressed{
+    -fx-background-color: #0047AB;
+    -fx-effect: dropshadow( one-pass-box , rgba(0,0,0,0.3) , 7, 0.0 , 0 , 3 );
+}
+
+.textfield{
+    -fx-background-color: white;
+    -fx-border-color: transparent transparent #3498db transparent; /* Chỉ có viền dưới */
+    -fx-border-width: 0 0 2px 0;
+    -fx-padding: 8px;
+    -fx-font-size: 14px;
+    -fx-text-fill: #2c3e50;
+    -fx-prompt-text-fill: #95a5a6;
+    -fx-background-insets: 0;
+    -fx-background-radius: 0;
+    
+}
+.textfield:focus{
+    -fx-border-color: transparent transparent #2980b9 transparent;
+    -fx-background-color: #ecf0f1;
+}
+.textfield.error{
+    -fx-border-color: transparent transparent #e74c3c transparent;
+
+}
+.gradientcolor1{
+    -fx-background-color: linear-gradient(to bottom right,#ECE9E6,#FFFFFF)
+}
+.label-login {
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #3498db;
+}
+.label-login:hover {
+    -fx-text-fill: #0047AB;
+}
+.label-login:pressed {
+    -fx-text-fill: #0047AB;
+    -fx-effect: dropshadow( one-pass-box , rgba(0,0,0,0.2) , 10, 0.0 , 0 , 5 );
+}
+
+.label-welcome-back {
+    -fx-font-size: 32px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #2c3e50;
+    -fx-effect: dropshadow( one-pass-box , rgba(0,0,0,0.25) , 5, 0.0 , 0 , 1 );
+    -fx-font-family: 'Arial', sans-serif;
+    -fx-alignment: center;
+}
+.label-welcome-back:hover {
+    -fx-text-fill: #34495e;
+    -fx-effect: dropshadow( one-pass-box , rgba(0,0,0,0.35) , 10, 0.0 , 0 , 2 );
+}
+.label-welcome-back:pressed {
+    -fx-text-fill: #0047AB;
+}
+
+
+.btnsendemail:hover{
+    -fx-background-color: #0047AB;
+}
+.btnsendemail{
+    -fx-background-color: #3498db;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow( one-pass-box , rgba(0,0,0,0.2) , 5, 0.0 , 0 , 2 );
+}
+.btnsendemail:focus{
+    -fx-background-color: #0047AB;
+    -fx-effect: dropshadow( one-pass-box , rgba(0,0,0,0.4) , 7, 0.0 , 0 , 3 );
+}
+.btnsendemail:pressed{
+    -fx-background-color: #0047AB;
+    -fx-effect: dropshadow( one-pass-box , rgba(0,0,0,0.3) , 7, 0.0 , 0 , 3 );
+}
