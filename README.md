@@ -22,7 +22,7 @@ Welcome to Book Store, the place to satisfy your passion for reading! We are pro
 ### Resources
 
 - **Documentations** : [Document](https://github.com/NAonlines/Book-Store_Group3/tree/NAonlines/Eproject/Document)
-- **Database** : [Database](https://github.com/NAonlines/Book-Store_Group3)
+- **Database** : [Database](https://github.com/NAonlines/Book-Store_Group3/tree/NAonlines/Eproject/database)
 - **Link video demo app** :[Youtube](https://www.youtube.com/)
 
 ### Usage
