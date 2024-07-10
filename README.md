@@ -10,10 +10,10 @@ Project Details
 
 List Of Members
 
-    Phạm Hữu Nam Anh - Student ID: 1501062
-    Vương Hữu Thắng - Student ID: 1501300
-    Trần Vinh Quang - Student ID: 1501274
-
+    Phạm Hữu Nam Anh - Student ID: Student1501062
+    Vương Hữu Thắng - Student ID: Student1501300 
+    Trần Vinh Quang - Student ID: Student1501274
+    Nguyễn Thành Nghĩa - Student ID: Student1477169
 Resources
 
     Documentations:
