@@ -6,7 +6,7 @@ Project Details
     Supervisor: Phạm Công Danh
     Semester: II
     Batch No: T5.2308.M0
-    Group No: 01
+    Group No: 3
 
 List Of Members
 
