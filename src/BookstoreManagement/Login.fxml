@@ -31,12 +31,16 @@
                   <Image url="@../Icon/icons8_show_password_32px_1.png" />
                </image>
             </ImageView>
-            
-            <CheckBox fx:id="ck_remember" layoutX="35.0" layoutY="392.0" mnemonicParsing="false" prefHeight="21.0" prefWidth="139.0" text="Save Username">
-               <font>
-                  <Font size="15.0" />
-               </font>
-            </CheckBox>
+            <AnchorPane layoutX="35.0" layoutY="392.0" visible="false">
+               <children>
+                  
+                  <CheckBox fx:id="ck_remember" mnemonicParsing="false" prefHeight="21.0" prefWidth="139.0" text="Save Username">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </CheckBox>
+               </children>
+            </AnchorPane>
             <TextField fx:id="txt_password_visible" layoutX="35.0" layoutY="250.0" prefHeight="45.0" prefWidth="350.0" promptText="Password" styleClass="textfield" />
             <ImageView fx:id="btn_hidenpass" fitHeight="32.0" fitWidth="32.0" layoutX="345.0" layoutY="258.0" onDragDetected="#handle_showpass" onMouseClicked="#handle_showpass" pickOnBounds="true" preserveRatio="true">
                <image>

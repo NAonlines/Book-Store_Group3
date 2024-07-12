@@ -547,3 +547,37 @@
     -fx-font-size: 15px;
     -fx-padding: 5px;
 }
+
+
+.addborder{
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.75), 8, 0.5, 0, 0);
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+
+}
+
+.btnbookbuy {
+    -fx-background-color: linear-gradient(to right, #e5e5e5, #cccccc);
+    -fx-background-radius: 5;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 10, 0.5, 0, 0);
+    -fx-cursor: hand;
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+    -fx-transition: background-color 0.3s ease;
+}
+
+.btnbookbuy:hover {
+    -fx-background-color: #66bb6a; /* Màu xanh lá nhẹ nhàng */
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0.5, 0, 0);
+    
+    -fx-text-fill: #FFFFFF;
+    -fx-font-weight: bold;
+}
+
+.btnbookbuy:pressed {
+ -fx-border-color: #0047AB;
+    -fx-background-color: #f4f4f4;
+    -fx-effect: dropshadow(gaussian, rgba(135, 206, 235, 0.7), 5, 0.5, 0, 0);
+    -fx-text-fill: #FFFFFF;
+    -fx-font-weight: bold;
+}

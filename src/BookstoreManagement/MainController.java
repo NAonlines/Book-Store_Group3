@@ -3,6 +3,7 @@ package BookstoreManagement;
 import Li_Alert.Alert;
 import Li_Encrypt.KeyManager;
 import Li_Encrypt.LibaryEncrypt;
+import java.awt.print.Book;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -29,6 +30,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
@@ -364,10 +366,15 @@ public class MainController implements Initializable {
             alert.showAlert("Connect to server failed");
             return;
         }
+        showDataBooks();
         showDataPublisher();
         showDataOrder();
         selectDataPublisher();
         selectDataOrder();
+        
+        loadBookTitles();
+
+        
                 
         showDataMember();
         btn_hidenpass.setVisible(false);
@@ -456,7 +463,7 @@ public class MainController implements Initializable {
     }
     
     
-        @FXML
+    @FXML
     void handle_adduser(ActionEvent event) throws Exception {
          if(txt_usernamemember.getText().isEmpty() 
                 || txt_passwordmember.getText().isEmpty()
@@ -492,6 +499,8 @@ public class MainController implements Initializable {
                 stmt.executeUpdate();    
                 alert.showAlert("ADD Successfully.");
                 showDataMember();
+                handle_reset(null);
+
                 
 
            } catch (SQLException e) {
@@ -611,6 +620,7 @@ public class MainController implements Initializable {
             if (rows > 0) {
                 alert.showAlert("User has been successfully deleted.");
                 showDataMember();
+                handle_reset(null);
             } else {
                 alert.showAlert("Delete failed.");
             }
@@ -637,7 +647,14 @@ public class MainController implements Initializable {
 
     @FXML
     void handle_updateuser(ActionEvent event) throws Exception {
-        try {
+        if(txt_usernamemember.getText().isEmpty() 
+                || txt_passwordmember.getText().isEmpty()
+                || date_birthday.getValue() == null
+                || txt_emailmember.getText().isEmpty())
+        {
+           alert.showAlert("Please input full information");
+        }else{
+            try {   
                 if (!ValidPassword(txt_passwordmember.getText())) {
                    alert.showAlert("Password must be longer than 5 characters, contain at least one capital letter and one number");
                    return;
@@ -665,25 +682,35 @@ public class MainController implements Initializable {
                 if (rows > 0) {
                     alert.showAlert("User updated successfully.");
                     showDataMember();
+                    handle_reset(null);
                 } else {
                     alert.showAlert("Update failed");
                 }
 
 
-           } catch (SQLException e) {
+            } catch (SQLException e) {
                if (e.getMessage().contains("Username already exists.")) {
                    alert.showAlert("Username already exists.");
                } else if (e.getMessage().contains("Email already exists.")) {
                    alert.showAlert("Email already exists.");
                }else if (e.getMessage().contains("Gender is required.")) {
                    alert.showAlert("Gender is required.");
+               }else if (e.getMessage().contains("Invalid role value.")) {
+                   alert.showAlert("Role is required.");
                }else if (e.getMessage().contains("Year of birth must be from 1920 to 2020.")) {
                    alert.showAlert("Year of birth must be from 1920 to 2020.");
                }else{
                    alert.showAlert("Failed");
                    System.out.print("Error closing statement: " + e.getMessage());
+
                }
+            }
+            
+            
         }
+        
+        
+        
     }
     
     
@@ -724,8 +751,6 @@ public class MainController implements Initializable {
                     rs.getString("cardnumber")
                 );
                 dataList.add(data);
-                System.out.print("cardnumber");
-
             }
         } catch (Exception e) {
             System.out.println("Errors: " + e.getMessage());
@@ -1025,6 +1050,8 @@ public class MainController implements Initializable {
             @FXML
             private TableColumn<ModelPublisher, String> col_email;
             @FXML
+            private TableColumn<ModelPublisher, String> col_titlePbooks;      
+            @FXML
             private TableColumn<ModelPublisher, Integer> col_id;
             @FXML
             private TableColumn<ModelPublisher, String> col_name;
@@ -1064,6 +1091,7 @@ public class MainController implements Initializable {
             private TableColumn<ModelOrder, Integer> col_iduser;
             @FXML
             private TableColumn<ModelOrder, Integer> col_idcart;
+          
             @FXML
             private TableColumn<ModelOrder, String> col_orderdate;
             @FXML
@@ -1093,47 +1121,54 @@ public class MainController implements Initializable {
 
 
         //Publisher    
-        public ObservableList<ModelPublisher> datapublisher(){ 
-                //goi ham 
-                ObservableList<ModelPublisher> datapublisher = FXCollections.observableArrayList(); 
-               try{ 
-
-                    if(conn==null){
-                        alert.showAlert("Can't connect to database");
-
-                        return datapublisher;
-
-                    }
-                    String sql = "select * from Publishers"; 
-                    pstmt = conn.prepareStatement(sql); 
-                    rs = pstmt.executeQuery(); 
-                    ModelPublisher data; 
-                    while(rs.next()){ 
-                        data= new ModelPublisher(
-                                rs.getInt("publisher_id"),  
-                                rs.getString("name"), 
-                                rs.getString("address"),  
-                                rs.getString("phone"), 
-                                rs.getString("email") 
-                        ); 
-                        datapublisher.add(data); 
-                    } 
-                }catch(Exception e){ 
-                    System.out.println(e.getMessage()); 
-                } 
-                return datapublisher; 
+        public ObservableList<ModelPublisher> datapublisher() {
+            ObservableList<ModelPublisher> datapublisher = FXCollections.observableArrayList();
+            try {
+                if (conn == null) {
+                    // Replace this with your alert implementation
+                    System.out.println("Can't connect to database");
+                    return datapublisher;
+                }
+                String sql = "SELECT p.publisher_id, p.name, p.address, p.phone, p.email, b.title " +
+                             "FROM Publishers p " +
+                             "JOIN BookPublishers bp ON p.publisher_id = bp.publisher_id " +
+                             "JOIN Books b ON bp.book_id = b.book_id";
+                pstmt = conn.prepareStatement(sql);
+                rs = pstmt.executeQuery();
+                while (rs.next()) {
+                    ModelPublisher data = new ModelPublisher(
+                        rs.getInt("publisher_id"),
+                        rs.getString("name"),
+                        rs.getString("address"),
+                        rs.getString("phone"),
+                        rs.getString("email"),
+                        rs.getString("title")
+                    );
+                    datapublisher.add(data);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+                try {
+                    if (rs != null) rs.close();
+                    if (pstmt != null) pstmt.close();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
+            return datapublisher;
+        }
 
-        public void showDataPublisher(){ 
-                ObservableList<ModelPublisher> showList = datapublisher(); 
-                col_id.setCellValueFactory(new PropertyValueFactory<>("publisher_id")); 
-                col_name.setCellValueFactory(new PropertyValueFactory<>("name")); 
-                col_address.setCellValueFactory(new PropertyValueFactory<>("address")); 
-                col_phone.setCellValueFactory(new PropertyValueFactory<>("phone")); 
-                col_email.setCellValueFactory(new PropertyValueFactory<>("email")); 
-                tablepublisher.setItems(showList);   
-            } 
-
+        public void showDataPublisher() {
+            ObservableList<ModelPublisher> showList = datapublisher();
+            col_id.setCellValueFactory(new PropertyValueFactory<>("publisher_id"));
+            col_name.setCellValueFactory(new PropertyValueFactory<>("name"));
+            col_address.setCellValueFactory(new PropertyValueFactory<>("address"));
+            col_phone.setCellValueFactory(new PropertyValueFactory<>("phone"));
+            col_email.setCellValueFactory(new PropertyValueFactory<>("email"));
+            col_titlePbooks.setCellValueFactory(new PropertyValueFactory<>("title"));
+            tablepublisher.setItems(showList);
+        }
         public void selectDataPublisher(){
                 ModelPublisher data = tablepublisher.getSelectionModel().getSelectedItem();
                 int num = tablepublisher.getSelectionModel().getSelectedIndex();
@@ -1144,50 +1179,89 @@ public class MainController implements Initializable {
                 txtaddress.setText(data.getAddress());
                 txtemail.setText(data.getEmail());
         }
+        
+        @FXML
+        private ComboBox<ModelBooks> publicser_selectbook;
+        @FXML
+        private TextField publiser_idbook;
 
+        private void loadBookTitles() {
+            String sql = "SELECT book_id, title FROM books";
+            ObservableList<ModelBooks> bookList = FXCollections.observableArrayList();
+            try {
+                pstmt = conn.prepareStatement(sql);
+                rs = pstmt.executeQuery();
+                while (rs.next()) {
+                    int bookId = rs.getInt("book_id");
+                    String title = rs.getString("title");
+                    ModelBooks book = new ModelBooks(bookId, null, title, null, null, 0.0, 0, null);
+                    bookList.add(book);
+                }
+                publicser_selectbook.setItems(bookList);
+
+                publicser_selectbook.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+                    if (newValue != null) {
+                        publiser_idbook.setText(String.valueOf(newValue.getBook_id()));
+                    }
+                });
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+                try {
+                    if (rs != null) rs.close();
+                    if (pstmt != null) pstmt.close();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        
+ 
+        
+        
+        
         public void insertPublisher() {
-            
+
               String name = txtname.getText();
               String phone = txtphone.getText();
               String email = txtemail.getText();
               String address = txtaddress.getText();
-                if (txtname.getText().isEmpty() ||
-                    txtphone.getText().isEmpty() || 
-                    txtemail.getText().isEmpty() || 
-                    txtaddress.getText().isEmpty()) {
-                    alert.showAlert("Please fill in all fields.");
-                } else {
-                    
-                    try{
-                        String checkEmail = "SELECT * FROM Publishers where email= '"+ txtemail.getText() + "'";
-                        pstmt = conn.prepareStatement(checkEmail);
-                        rs = pstmt.executeQuery();
-                        if (rs.next()) {
-                            alert.showAlert("Email này đã được đăng ký");
-                        }else{
-                             String sql = "INSERT INTO Publishers (name, phone, address, email) VALUES (?, ?, ?, ?)";
-                                pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-                                pstmt.setString(1, name);
-                                pstmt.setString(2, phone);
-                                pstmt.setString(3, address);
-                                pstmt.setString(4, email);
+              int bookId = Integer.parseInt(publiser_idbook.getText());
 
-                                int result = pstmt.executeUpdate();
-                                if (result > 0) {
-                                    alert.showAlert("Publisher added successfully!");
-                                    showDataPublisher(); // Refresh the table view
-                                } else {
-                                    alert.showAlert("Error occurred while adding the publisher.");
-                                }
-                        }
-                    
-                    }catch(Exception ex){
-                        System.out.print("Erors : " +ex.getMessage());
-                    }
-                        
-                    }
+              try {
+                  String insertPublisherSql = "INSERT INTO Publishers (name, address, phone, email) VALUES (?, ?, ?, ?)";
+                  pstmt = conn.prepareStatement(insertPublisherSql, Statement.RETURN_GENERATED_KEYS);
+                  pstmt.setString(1, name);
+                  pstmt.setString(2, address);
+                  pstmt.setString(3, phone);
+                  pstmt.setString(4, email);
+                  pstmt.executeUpdate();
 
-                }
+                  rs = pstmt.getGeneratedKeys();
+                  int publisherId = 0;
+                  if (rs.next()) {
+                      publisherId = rs.getInt(1);
+                  }
+
+                  String insertBookPublisherSql = "INSERT INTO BookPublishers (book_id, publisher_id) VALUES (?, ?)";
+                  pstmt = conn.prepareStatement(insertBookPublisherSql);
+                  pstmt.setInt(1, bookId);
+                  pstmt.setInt(2, publisherId);
+                  pstmt.executeUpdate();
+
+                  alert.showAlert("Publisher added and linked to book successfully!");
+                  showDataPublisher();
+              } catch (SQLException e) {
+                  e.printStackTrace();
+              } finally {
+                  try {
+                      if (rs != null) rs.close();
+                      if (pstmt != null) pstmt.close();
+                  } catch (SQLException e) {
+                      e.printStackTrace();
+                  }
+              }
+        }
     
 
         public void deletePublisher() {
@@ -1273,7 +1347,8 @@ public class MainController implements Initializable {
                                 rs.getString("name"),
                                 rs.getString("address"),
                                 rs.getString("phone"),
-                                rs.getString("email")
+                                rs.getString("email"),
+                                rs.getString("title")
                         );
                         allPublishers.add(publisher);
                     }
@@ -1305,7 +1380,8 @@ public class MainController implements Initializable {
                                 rs.getString("name"),
                                 rs.getString("address"),
                                 rs.getString("phone"),
-                                rs.getString("email")
+                                rs.getString("email"),
+                                rs.getString("title")
                         );
                         searchResult.add(publisher);
                     }
@@ -1320,7 +1396,7 @@ public class MainController implements Initializable {
             }
         }
         
-        
+       
 
 
 
@@ -1391,25 +1467,46 @@ public class MainController implements Initializable {
                 
             }
 
-    public void deletOrder() {
-                int selectedIndex = tableorder.getSelectionModel().getSelectedIndex();
-                    if (selectedIndex >= 0) {
-                      ModelOrder selectedOrder = tableorder.getItems().get(selectedIndex);
-                  int OrderId = selectedOrder.getOrder_id();
-                  String sql = "DELETE FROM Orders WHERE order_id = ?";
-                     try {
-                        pstmt = conn.prepareStatement(sql);
-                        pstmt.setInt(1, OrderId);
-                        int result = pstmt.executeUpdate();
-                        if (result > 0) {
-                            alert.showAlert("Order deleted successfully!");
-                            showDataOrder(); 
-                     } else {
-                         alert.showAlert("Error occurred while deleting the Order.");
-                        }
-                    } catch (Exception e) {}
+            public void deletOrder() {
+                
+            int selectedIndex = tableorder.getSelectionModel().getSelectedIndex();
+            
+            if (selectedIndex >= 0) {
+                ModelOrder selectedOrder = tableorder.getItems().get(selectedIndex);
+                int OrderId = selectedOrder.getOrder_id();
+                String deletePaymentsSql = "DELETE FROM Payments WHERE order_id = ?";
+                String deleteOrderSql = "DELETE FROM Orders WHERE order_id = ?";
+                try {
+                    conn.setAutoCommit(false);
+
+                    pstmt = conn.prepareStatement(deletePaymentsSql);
+                    pstmt.setInt(1, OrderId);
+                    pstmt.executeUpdate();
+
+                    pstmt = conn.prepareStatement(deleteOrderSql);
+                    pstmt.setInt(1, OrderId);
+                    int result = pstmt.executeUpdate();
+
+                    if (result > 0) {
+                        conn.commit(); // Commit transaction
+                        alert.showAlert("Order deleted successfully!");
+                        showDataOrder();
+                    } else {
+                        conn.rollback(); // Rollback transaction
+                        alert.showAlert("Error occurred while deleting the Order.");
+                    }
+                } catch (Exception e) {
+                    try {
+                        conn.rollback();
+                    } catch (SQLException rollbackException) {
+                        rollbackException.printStackTrace();
+                    }
+                    System.out.println("Errors: " + e.getMessage());
+                    e.printStackTrace();
                 }
             }
+    }
+
 
     public void exitOrder() {
                 Stage stage = (Stage) btnexitorder.getScene().getWindow();
@@ -1518,8 +1615,8 @@ public class MainController implements Initializable {
             return;
         }
         try {
+            
            int getOrderid = Integer.parseInt(txtidorder.getText());
-
             FXMLLoader loader = new FXMLLoader(getClass().getResource("Detail.fxml"));
             Parent root = loader.load();
             DetailController detail = loader.getController();
@@ -1538,9 +1635,312 @@ public class MainController implements Initializable {
 
 
 
+//--------------------------------------------------------------------------------------------------------------------------------
+//-----------------------------------------THẮNG----------------------------------------------------    
+    
+    
+    
+    @FXML
+    private TableView<ModelBooks> tb_books;
+    @FXML
+    private TableColumn<ModelBooks, Integer> cl_bookid;
+    @FXML
+    private TableColumn<ModelBooks, String> cl_bookimg;
+    @FXML
+    private TableColumn<ModelBooks, String> cl_booktitle;
+    @FXML
+    private TableColumn<ModelBooks, String> cl_bookauthor;
+    @FXML
+    private TableColumn<ModelBooks, String> cl_bookgenre;
+    @FXML
+    private TableColumn<ModelBooks, Double> cl_bookprice;
+    @FXML
+    private TableColumn<ModelBooks, Integer> cl_bookstock;
+    @FXML
+    private TableColumn<ModelBooks, Timestamp> cl_bookcreated_at;
 
+    
+    @FXML
+    private AnchorPane booksimg_anchor;
+    @FXML
+    private ImageView books_img;
+    @FXML
+    private Label books_pathimg;
+    
+    
+    @FXML
+    private TextField txt_idbook,txt_titlebook,txt_authorbook,txt_genrebook,txt_pricebook,txt_stockbook,txt_searchbook;
+    
+    
+    @FXML
+    private Button  btn_resetbook,btn_addbook,btn_addimgbook,btn_editbook,btn_deletebook,btn_findbook;
+    
+    
+        public ObservableList<ModelBooks> dataBooks(){ 
+                ObservableList<ModelBooks> dataList = FXCollections.observableArrayList(); 
+               try{ 
 
+                    String sql = "select * from Books"; 
+                    pstmt = conn.prepareStatement(sql); 
+                    rs = pstmt.executeQuery(); 
+                    ModelBooks data; 
+                    while(rs.next()){ 
+                        data= new ModelBooks(
+                                rs.getInt("book_id"),  
+                                rs.getString("bookimg"), 
+                                rs.getString("title"),  
+                                rs.getString("author"), 
+                                rs.getString("genre"),
+                                rs.getDouble("price"),
+                                rs.getInt("stock"),
+                                rs.getTimestamp("created_at")
+                                
+                           
+                        ); 
+                        dataList.add(data); 
+                    } 
+                }catch(Exception e){ 
+                    System.out.println(e.getMessage()); 
+                } 
+                return dataList; 
+        }
+        public void showDataBooks() {
+           ObservableList<ModelBooks> showList = dataBooks();
+           cl_bookid.setCellValueFactory(new PropertyValueFactory<>("book_id"));
+           cl_bookimg.setCellValueFactory(new PropertyValueFactory<>("bookimg"));
+           cl_booktitle.setCellValueFactory(new PropertyValueFactory<>("title"));
+           cl_bookauthor.setCellValueFactory(new PropertyValueFactory<>("author"));
+           cl_bookgenre.setCellValueFactory(new PropertyValueFactory<>("genre"));
+           cl_bookprice.setCellValueFactory(new PropertyValueFactory<>("price"));
+           cl_bookstock.setCellValueFactory(new PropertyValueFactory<>("stock"));
+           cl_bookcreated_at.setCellValueFactory(new PropertyValueFactory<>("created_at"));
+           tb_books.setItems(showList);   
+       }
+        public void selectDataBooks(){
+        ModelBooks data = tb_books.getSelectionModel().getSelectedItem();
+        int num = tb_books.getSelectionModel().getSelectedIndex();
+        if (num < 0) return;
 
+        txt_idbook.setText(String.valueOf(data.getBook_id()));
+        txt_titlebook.setText(data.getTitle());
+        
+        txt_authorbook.setText(data.getAuthor());
+        txt_genrebook.setText(data.getGenre());
+        txt_pricebook.setText(String.valueOf(data.getPrice()));
+        txt_stockbook.setText(String.valueOf(data.getStock()));
+        
+        String picture ="file:" +  data.getBookimg();
+        Image image = new Image(picture, 110, 110, false, true);
+        books_img.setImage(image);
+        String path =data.getBookimg();
+        books_pathimg.setText(path);
+        
+        
+        }
+        
 
-      
+    public void insertImageBooks(){
+        FileChooser open = new FileChooser();
+        if (lastUsedDirectory != null) {
+            File initialDirectory  = new File(lastUsedDirectory);
+            if (initialDirectory.exists()) {
+                open.setInitialDirectory(initialDirectory);
+            }
+        }
+        Stage stage = (Stage)booksimg_anchor.getScene().getWindow();
+        File file = open.showOpenDialog(stage);
+        if(file != null){
+            String path = file.getAbsolutePath();
+            lastUsedDirectory = file.getParent();
+
+            path = path.replace("\\", "\\\\");
+            books_pathimg.setText(path);
+            Image image = new Image(file.toURI().toString(), 110, 110, false, true);
+            books_img.setImage(image);
+
+        }else{
+                System.out.println("NO DATA EXIST!");
+        }
+       
+    }
+    @FXML
+    void handleAddBook(ActionEvent event){
+        
+        if(txt_titlebook.getText().isEmpty() || txt_authorbook.getText().isEmpty() || txt_genrebook.getText().isEmpty() || txt_pricebook.getText().isEmpty() || txt_stockbook.getText().isEmpty()){
+          alert.showAlert("All textfield must be required");
+        }else{
+            try {
+                
+                    try {
+                        Double.parseDouble(txt_pricebook.getText().trim());
+                        Integer.parseInt(txt_stockbook.getText().trim());
+                    } catch (NumberFormatException e) {
+                        alert.showAlert("Price and Stock must be valid numbers");
+                        return;
+                    }
+                    String checkbooks = "SELECT * FROM Books WHERE title = ?";
+                    pstmt = conn.prepareStatement(checkbooks);
+                    pstmt.setString(1, txt_titlebook.getText().trim());
+                    rs = pstmt.executeQuery();
+                            if(rs.next()) {
+                        alert.showAlert("WARNING! The book title already exists");
+                    } else {
+                        String sql = "INSERT INTO Books(bookimg, title, author, genre, price, stock) VALUES(?, ?, ?, ?, ?, ?)";
+                        pstmt = conn.prepareStatement(sql);
+                        pstmt.setString(1, books_pathimg.getText());
+                        pstmt.setString(2, txt_titlebook.getText().trim());
+                        pstmt.setString(3, txt_authorbook.getText().trim());
+                        pstmt.setString(4, txt_genrebook.getText().trim());
+                        pstmt.setDouble(5, Double.parseDouble(txt_pricebook.getText().trim()));
+                        pstmt.setInt(6, Integer.parseInt(txt_stockbook.getText().trim()));
+
+                        int rowsAffected = pstmt.executeUpdate();
+
+                        if(rowsAffected > 0) {
+                            alert.showAlert("Book added successfully");
+                            showDataBooks();
+                            resetbooks();
+
+                        } else {
+                            alert.showAlert("Failed to add the book");
+                        }
+                    }
+
+            } catch (Exception e) {
+                System.out.println("Errors : "+e.getMessage());
+            }
+        }
+    }
+   @FXML
+    void handleEditBook(ActionEvent event) {
+    if(txt_titlebook.getText().isEmpty() || txt_authorbook.getText().isEmpty() || txt_genrebook.getText().isEmpty() || txt_pricebook.getText().isEmpty() || txt_stockbook.getText().isEmpty()) {
+        alert.showAlert("All textfields must be filled");
+    } else {
+        try {
+            Double.parseDouble(txt_pricebook.getText().trim());
+            Integer.parseInt(txt_stockbook.getText().trim());
+            Integer.parseInt(txt_idbook.getText().trim());
+        } catch (NumberFormatException e) {
+            alert.showAlert("Price and Stock must be valid numbers");
+            return;
+        }
+
+        try {
+            
+            String sql = "UPDATE Books SET bookimg = ?, title = ?, author = ?, genre = ?, price = ?, stock = ? WHERE book_id = ?";
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, books_pathimg.getText());
+            pstmt.setString(2, txt_titlebook.getText().trim());
+            pstmt.setString(3, txt_authorbook.getText().trim());
+            pstmt.setString(4, txt_genrebook.getText().trim());
+            pstmt.setDouble(5, Double.parseDouble(txt_pricebook.getText().trim()));
+            pstmt.setInt(6, Integer.parseInt(txt_stockbook.getText().trim()));
+            pstmt.setInt(7, Integer.parseInt(txt_idbook.getText().trim()));
+
+            int rowsAffected = pstmt.executeUpdate();
+            
+            if(rowsAffected > 0) {
+                alert.showAlert("Update Books successfully.");
+                showDataBooks();
+                resetbooks();
+            } else {
+                alert.showAlert("Update Books Failed.");
+            }
+        } catch (Exception e) {
+   
+            System.out.println("Errors : " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+    }
+
+    
+    
+    
+    @FXML
+    void handleDeleteBook(ActionEvent event){
+        
+        try {
+        String sql = "DELETE FROM Books WHERE book_id = ?";
+        pstmt = conn.prepareStatement(sql);
+        pstmt.setInt(1, Integer.parseInt(txt_idbook.getText().trim()));
+
+        int rowsAffected = pstmt.executeUpdate();
+        
+        if(rowsAffected > 0) {
+            alert.showAlert("Delete Books Successfully");
+            showDataBooks();
+        } else {
+            alert.showAlert("Delete Books Failed");
+        }
+    } catch (Exception e) {
+        System.out.println("Errors : " + e.getMessage());
+        e.printStackTrace();
+    }
+    }
+    
+    @FXML
+    void handleResetbooks(ActionEvent event){
+      resetbooks();
+   }
+    public void resetbooks(){
+        txt_idbook.setText("");
+        txt_titlebook.setText("");
+        books_img.setImage(null);
+        txt_authorbook.setText("");
+        txt_genrebook.setText("");
+        txt_pricebook.setText("");
+        txt_stockbook.setText("");
+        books_pathimg.setText("");
+    }
+    @FXML
+    void handleFindbook(ActionEvent event) {
+            String keyword = txt_searchbook.getText().trim();
+            if (keyword.isEmpty()) {
+                alert.showAlert("Search field must be filled");
+                return;
+            }
+            searchBooks(keyword);
+        }
+
+    private void searchBooks(String keyword) {
+            ObservableList<ModelBooks> dataList = FXCollections.observableArrayList();
+            try {
+                String sql = "SELECT * FROM Books WHERE title LIKE ? OR author LIKE ?";
+                pstmt = conn.prepareStatement(sql);
+                pstmt.setString(1, "%" + keyword + "%");
+                pstmt.setString(2, "%" + keyword + "%");
+                rs = pstmt.executeQuery();
+                ModelBooks data;
+                while (rs.next()) {
+                    data = new ModelBooks(
+                            rs.getInt("book_id"),
+                            rs.getString("bookimg"),
+                            rs.getString("title"),
+                            rs.getString("author"),
+                            rs.getString("genre"),
+                            rs.getDouble("price"),
+                            rs.getInt("stock"),
+                            rs.getTimestamp("created_at")
+                    );
+                    dataList.add(data);
+                }
+                showSearchResults(dataList);
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+    }
+
+    private void showSearchResults(ObservableList<ModelBooks> dataList) {
+            cl_bookid.setCellValueFactory(new PropertyValueFactory<>("book_id"));
+            cl_bookimg.setCellValueFactory(new PropertyValueFactory<>("bookimg"));
+            cl_booktitle.setCellValueFactory(new PropertyValueFactory<>("title"));
+            cl_bookauthor.setCellValueFactory(new PropertyValueFactory<>("author"));
+            cl_bookgenre.setCellValueFactory(new PropertyValueFactory<>("genre"));
+            cl_bookprice.setCellValueFactory(new PropertyValueFactory<>("price"));
+            cl_bookstock.setCellValueFactory(new PropertyValueFactory<>("stock"));
+            cl_bookcreated_at.setCellValueFactory(new PropertyValueFactory<>("created_at"));
+            tb_books.setItems(dataList);
+    }
+
 }

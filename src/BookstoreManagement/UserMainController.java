@@ -49,6 +49,10 @@ import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.ColumnConstraints;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Region;
+import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.StackPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -246,7 +250,9 @@ public class UserMainController implements Initializable {
 
     private double xOffset = 0;
     private double yOffset = 0;
-
+    
+//   =-----------------------------------------------------------------------------------------------------= 
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
@@ -277,9 +283,10 @@ public class UserMainController implements Initializable {
         purchaseBookTitle();
         purchaseBookId();
         purchaseDisplayQuantity();
+        menuDisplayBooks();
     }
     
-    
+//   =-----------------------------------------------------------------------------------------------------= 
     
     
     
@@ -555,6 +562,7 @@ void handle_updateprofileuser(ActionEvent event) throws Exception {
  public void btnpayment(){
         PAYMENT1.setVisible(true);
         SHOPPINGCART1.setVisible(true);
+        BOOKS.setVisible(false);
         
  }
  
@@ -626,7 +634,7 @@ void handle_updateprofileuser(ActionEvent event) throws Exception {
     private Spinner<Integer> purchase_quantity;
 
     @FXML
-    private AnchorPane Paymentmethod;
+    private AnchorPane Paymentmethod,shoppingcart_menu;
     @FXML
     private Button btncash;
     @FXML
@@ -645,7 +653,7 @@ void handle_updateprofileuser(ActionEvent event) throws Exception {
     // ***************** Nghia********************//
     private void handlePaidButton(ActionEvent event) {
         try {
-            conn = ConnectDB.ConnectDB.getConnectDB();
+
             conn.setAutoCommit(false);
 
             clearOldData();
@@ -681,7 +689,7 @@ void handle_updateprofileuser(ActionEvent event) throws Exception {
 
     @FXML
     private void handleExitbutton2(ActionEvent event) {
-        SHOPPINGCART1.setVisible(true);
+        shoppingcart_menu.setVisible(true);
         cardcheck.setVisible(false);
 
     }
@@ -694,7 +702,7 @@ void handle_updateprofileuser(ActionEvent event) throws Exception {
 
         Paymentmethod.setVisible(false);
         cardcheck.setVisible(true);
-        SHOPPINGCART1.setVisible(false);
+        shoppingcart_menu.setVisible(false);
     }
     double discount = 0.0;
     String paymentMethod = "Card";
@@ -764,6 +772,7 @@ private void handleCashButton(ActionEvent event) throws JRException {
 
             showSuccessAlert();
         }
+        
     } catch (SQLException e) {
         e.printStackTrace();
         showErrorAlert("Database error occurred: " + e.getMessage());
@@ -1077,7 +1086,7 @@ private int getLatestOrderId() {
     }
 
     @FXML
-public void purchaseadd() throws JRException, SQLException {
+    public void purchaseadd() throws JRException, SQLException {
     // Check if the label is initialized
     if (pruchase_info_email == null) {
        
@@ -1271,5 +1280,227 @@ private int getCurrentUserId() {
     }
 
 
+ 
+    public void setBookID(Integer Booksid ){
+        
+    purchase_bookID.setValue(Booksid);
+    BOOKS.setVisible(false);
+    SHOPPINGCART1.setVisible(true);
+    PAYMENT1.setVisible(true);
+    fetchAndSetBookDetails(Booksid);
+
+    }
+    
+    private void fetchAndSetBookDetails(Integer Booksid) {
+        String sql = "SELECT * FROM Books WHERE book_id = ?";
+         try {
+             pstmt = conn.prepareStatement(sql);
+            
+            pstmt.setInt(1, Booksid);
+            rs = pstmt.executeQuery();
+            
+            if (rs.next()) {
+                pruchase_info_bookID.setText(String.valueOf(rs.getInt("book_id")));
+                pruchase_info_booktitle.setText(rs.getString("title"));
+                pruchase_info_author.setText(rs.getString("author"));
+                pruchase_info_genre.setText(rs.getString("genre"));
+                pruchase_info_createat.setText(rs.getString("created_at"));
+                pruchase_info_price.setText(rs.getString("price"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+
+   }
+
+    @FXML
+    public void initialize() {
+    }
+    public void setBookTitle(String BookName ){
+     
+    purchase_booktitle.setValue(BookName);
+
+    }
 //    ------------------------------------------------------------
+    //    history
+
+//    @FXML
+//    private TableColumn<Modelhistory, Integer> col_idorderhs;
+//    @FXML
+//    private TableColumn<Modelhistory, Integer> col_idbookhs;
+//    @FXML
+//    private TableColumn<Modelhistory, Integer> col_idcarths;
+//    @FXML
+//    private TableColumn<Modelhistory, String> col_emailhs;
+//
+//    @FXML
+//    private TableColumn<Modelhistory, Date> col_datehistory;
+//    @FXML
+//    private TableColumn<Modelhistory, Integer> col_quantityhs;
+//    @FXML
+//    private TableColumn<Modelhistory, Double> col_pricehs;
+//    @FXML
+//    private TableColumn<Modelhistory, Integer> col_discounths;
+//    Quang
+    
+    
+     //History
+//     @FXML
+//    private TableView<Modelhistory> tbPaymentHistory;
+//
+//    @FXML
+//    private TableColumn<Modelhistory, Integer> colIdOrderHs;
+//    @FXML
+//    private TableColumn<Modelhistory, Integer> colIdBookHs;
+//    @FXML
+//    private TableColumn<Modelhistory, Integer> colIdCartHs;
+//    @FXML
+//    private TableColumn<Modelhistory, String> colEmailHs;
+//    @FXML
+//    private TableColumn<Modelhistory, Date> colDateHistory;
+//    @FXML
+//    private TableColumn<Modelhistory, Integer> colQuantityHs;
+//    @FXML
+//    private TableColumn<Modelhistory, Double> colPriceHs;
+//    @FXML
+//    private TableColumn<Modelhistory, Double> colDiscountHs;
+//
+//
+//    public ObservableList<Modelhistory> datahistory() {
+//        ObservableList<Modelhistory> datahistory = FXCollections.observableArrayList();
+//        String sql = "SELECT * FROM OrderDetails";
+//        try {
+//            if (conn == null) {
+//                // Replace with your alert logic
+//                System.out.println("Can't connect to database");
+//                return datahistory;
+//            }
+//            pstmt = conn.prepareStatement(sql);
+//            rs = pstmt.executeQuery();
+//            while (rs.next()) {
+//                Modelhistory data = new Modelhistory(
+//                    rs.getInt("idorderdetail"),
+//                    rs.getInt("idorder"),
+//                    rs.getInt("idcart"),
+//                    rs.getInt("idbook"),
+//                    rs.getInt("quantity"),
+//                    rs.getDouble("price"),
+//                    rs.getInt("discount"),
+//                    rs.getDate("orderdate"),
+//                    rs.getString("email")
+//                );
+//                datahistory.add(data);
+//            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//        return datahistory;
+//    }
+//
+//    public void showDatahistory() {
+//        ObservableList<Modelhistory> showList = datahistory();
+//        colIdOrderHs.setCellValueFactory(new PropertyValueFactory<>("orderId"));
+//        colIdCartHs.setCellValueFactory(new PropertyValueFactory<>("cartId"));
+//        colIdBookHs.setCellValueFactory(new PropertyValueFactory<>("bookId"));
+//        colEmailHs.setCellValueFactory(new PropertyValueFactory<>("email"));
+//        colDateHistory.setCellValueFactory(new PropertyValueFactory<>("createdAt"));
+//        colQuantityHs.setCellValueFactory(new PropertyValueFactory<>("quantity"));
+//        colPriceHs.setCellValueFactory(new PropertyValueFactory<>("price"));
+//        colDiscountHs.setCellValueFactory(new PropertyValueFactory<>("discount"));
+//        tbPaymentHistory.setItems(showList);
+//    }
+//    
+    
+    
+    
+//    BOOKS NA
+    
+    
+    @FXML
+    private GridPane books_gridloader;
+
+    private ObservableList<ModelBooks> menuBooks = FXCollections.observableArrayList();
+
+    public ObservableList<ModelBooks> getmenuBooks() {
+    String sql = "SELECT * FROM Books";
+
+    ObservableList<ModelBooks> listdata = FXCollections.observableArrayList();
+    try {
+        pstmt = conn.prepareStatement(sql);
+        rs = pstmt.executeQuery();
+
+        ModelBooks databooks;
+
+        while (rs.next()) {
+            databooks = new ModelBooks(
+                    rs.getInt("book_id"),
+                    rs.getString("bookimg"),
+                    rs.getString("title"),
+                    rs.getString("author"),
+                    rs.getString("genre"),
+                    rs.getDouble("price"),
+                    rs.getInt("stock"),
+                    rs.getTimestamp("created_at")
+            );
+            listdata.add(databooks);
+        }
+
+        } catch (Exception e) {
+            System.out.println("Errors: " + e.getMessage());
+            e.printStackTrace();
+        }
+        return listdata;
+    }
+
+    public void menuDisplayBooks() {
+    menuBooks.clear();
+    menuBooks.addAll(getmenuBooks());
+    int row = 0;
+    int column = 0;
+
+    books_gridloader.getRowConstraints().clear();
+    books_gridloader.getColumnConstraints().clear();
+
+    books_gridloader.setHgap(30);
+    books_gridloader.setVgap(30);
+
+    for (int i = 0; i < 5; i++) { //  có 5 cột
+        ColumnConstraints colConst = new ColumnConstraints();
+        colConst.setPercentWidth(20); // Mỗi cột chiếm 20% chiều rộng
+        books_gridloader.getColumnConstraints().add(colConst);
+    }
+
+    RowConstraints rowConst = new RowConstraints();
+    rowConst.setMinHeight(Region.USE_PREF_SIZE); // Chiều cao tối thiểu theo kích thước ưa thích
+    books_gridloader.getRowConstraints().add(rowConst);
+
+    for (int i = 0; i < menuBooks.size(); i++) {
+        try {
+            FXMLLoader load = new FXMLLoader(getClass().getResource("BooksProduct.fxml"));
+            AnchorPane pane = load.load();
+            BooksProductController bookLoad = load.getController();
+
+            bookLoad.setData(menuBooks.get(i));
+
+            // Thêm lớp kiểu "book-pane"
+            pane.getStyleClass().add("book-pane");
+
+            if (column == 5) {
+                column = 0;
+                row += 1;
+                // ràng buộc hàng mới khi chuyển sang hàng mới
+                books_gridloader.getRowConstraints().add(rowConst);
+            }
+            books_gridloader.add(pane, column++, row);
+        } catch (Exception e) {
+            System.out.println("Errors: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+}
+
+    
+    
+
 }

@@ -41,7 +41,7 @@ public class DetailController implements Initializable {
     private Alert alert = new Alert();
 
     public void setOrderid(Integer getOrderid) {
-        txtidorder.setText(getOrderid.toString());
+        txtidorder.setText(getOrderid.toString().trim());
         selectOrderDetail();
     }
 
