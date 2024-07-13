@@ -98,11 +98,11 @@
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="80" splitType="Stretch">
+		<band height="35" splitType="Stretch">
 			<property name="com.jaspersoft.studio.layout"/>
 			<property name="com.jaspersoft.studio.unit.height" value="px"/>
 			<textField>
-				<reportElement stretchType="RelativeToBandHeight" x="-20" y="10" width="140" height="40" uuid="19c568f2-c203-4d72-a7c6-c916eb9e1793">
+				<reportElement stretchType="RelativeToBandHeight" x="-20" y="0" width="140" height="30" uuid="19c568f2-c203-4d72-a7c6-c916eb9e1793">
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
@@ -119,14 +119,14 @@
 				<textFieldExpression><![CDATA[$F{title}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="190" y="0" width="130" height="40" uuid="a7ea8a42-0abf-4ce9-9322-979eb9605dd1"/>
+				<reportElement x="190" y="0" width="130" height="30" uuid="a7ea8a42-0abf-4ce9-9322-979eb9605dd1"/>
 				<textElement textAlignment="Center">
 					<font size="15"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{quantity}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="430" y="10" width="110" height="40" uuid="3ffc5443-5712-48d3-b5a8-00d83b09a770"/>
+				<reportElement x="430" y="0" width="110" height="30" uuid="3ffc5443-5712-48d3-b5a8-00d83b09a770"/>
 				<textElement textAlignment="Center">
 					<font size="15"/>
 				</textElement>
@@ -135,14 +135,14 @@
 		</band>
 	</detail>
 	<columnFooter>
-		<band height="61" splitType="Stretch">
+		<band height="42" splitType="Stretch">
 			<property name="com.jaspersoft.studio.unit.height" value="px"/>
 		</band>
 	</columnFooter>
 	<pageFooter>
-		<band height="270" splitType="Stretch">
+		<band height="320" splitType="Stretch">
 			<image>
-				<reportElement x="170" y="10" width="210" height="260" uuid="eae7e5c7-1f25-4e54-8819-f210a285778f"/>
+				<reportElement x="172" y="60" width="210" height="260" uuid="eae7e5c7-1f25-4e54-8819-f210a285778f"/>
 				<imageExpression><![CDATA["C:/Users/shado/Downloads/IMG_4657.png"]]></imageExpression>
 			</image>
 		</band>

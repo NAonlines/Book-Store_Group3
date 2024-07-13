@@ -25,6 +25,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 public class BooksProductController implements Initializable {
+    
 
     @FXML
     private Button books_bookbuy;
@@ -87,13 +88,9 @@ public class BooksProductController implements Initializable {
             userMain.setBookID(booksId);
             userMain.setBookTitle(bookName);
             
-            Stage stage = new Stage();
-            stage.initStyle(StageStyle.UNDECORATED);
-            stage.setTitle("Book Store");
-            stage.setScene(new Scene(root));
-            stage.setFullScreen(false);
-            stage.setResizable(false);
-            stage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
+            Stage stage = (Stage) books_bookview.getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
             stage.show();
         } else {
             alert.showAlert("The book is out of stock.");

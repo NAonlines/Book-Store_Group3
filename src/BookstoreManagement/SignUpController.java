@@ -9,14 +9,10 @@ import Li_Encrypt.LibaryEncrypt;
 import java.io.IOException;
 import java.sql.*;
 import java.net.URL;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.util.Base64;
 import java.util.ResourceBundle;
-import java.util.concurrent.Callable;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -166,7 +162,8 @@ public class SignUpController implements Initializable {
                 int rows = stmt.executeUpdate();
                    
                    if(rows> 0){
-                       
+                    alert.showAlert("User registered successfully");
+    
                     Parent root = FXMLLoader.load(getClass().getResource("Login.fxml"));
                     Stage stage = new Stage();
                     stage.initStyle(StageStyle.UNDECORATED);
@@ -177,7 +174,6 @@ public class SignUpController implements Initializable {
                     stage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
                     stage.show();
                     fRegister.getScene().getWindow().hide();
-                    alert.showAlert("User registered successfully");
                     try{
                     if (conn != null) conn.close();
                     if (stmt != null) stmt.close();
